@@ -9,7 +9,7 @@ HTML and CSS template for your outstanding job applications
 ## What is Oh, So Simple HTML CV?
 
 **Oh, So Clear HTML CV!** is simple, clear and aesthetic **Resume** template for beginners to better understand HTML5 and CSS basics by example.
-##https://github.com/ritaly/HTML-CSS-CV-demo
+
 **This page will help you:**
 
 * create legible *CV (Curriculum Vitae)* / *Resume*
