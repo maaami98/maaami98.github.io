@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="container">
+<h2>Kaba Kuvvet Saldırı Hesaplayıcı</h2>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Şifre Uzunluğu</span>
+  </div>
+  <input type="text" id="pass-len" onchange="calc_olas()" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+<div class="vertical-input-group"> 
+	<div class="form-check-inline">
+	  <input class="form-check-input" type="checkbox" onchange="check()" id="upcase">
+	  <label class="form-check-label" for="defaultCheck1">
+		A-Z
+	  </label>
+	</div>
+	<div class="form-check-inline">
+
+	  <input class="form-check-input" type="checkbox" onchange="check()" id="lowcase">
+	  <label class="form-check-label" for="defaultCheck1">
+		a-z
+	  </label>
+	</div>
+	<div class="form-check-inline">
+
+	  <input class="form-check-input" type="checkbox" onchange="check()"  id="num">
+	  <label class="form-check-label" for="defaultCheck1">
+		0-9
+	  </label>
+	</div>
+</div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Karakter başına olasılık</span>
+  </div>
+  <input type="text" id="n" onchange="calc_olas()"	class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Şifre Olasılığı</span>
+  </div>
+  <input type="text" id="olas" class="form-control" aria-label="Şifre Olasılığı">
+  <div class="input-group-append">
+    <span class="input-group-text">Key</span>
+  </div>
+</div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Deneme Hızı</span>
+  </div>
+  <input type="text" id="rate" onchange="sure()" class="form-control" aria-label="Şifre Olasılığı">
+  <div class="input-group-append">
+    <span class="input-group-text">Key/s</span>
+  </div>
+</div>
+<span class="badge badge-info" id="sonuc"></span>
+
+<script>
+function calc_olas(){
+$("#olas").val(Math.pow($("#n").val(),$("#pass-len").val()))
+sure()
+}
+function check(){
+var olas=0
+if ($("#upcase")[0].checked) olas+=26
+if ($("#lowcase")[0].checked) olas+=26
+if ($("#num")[0].checked) olas+=10
+$("#n").val(olas)
+calc_olas()
+}
+function sure(){
+	var saniye=$("#olas").val()/$("#rate").val()
+	var dakika=(saniye/60)
+	var saat=(dakika/60)
+	var gun=(saat/24)
+	var out=""
+	if (gun >0)out+=parseInt(gun%24)+" Gün "
+	if (saat >0)out+=parseInt(saat%60)+" Saat "
+	if (dakika >0)out+=parseInt(dakika%60)+" Dakika "
+	if (saniye >0)out+=parseInt(saniye%60)+" Saniye "
+	$("#sonuc").html(out)
+}
+</script>
+</body>
+</html>
